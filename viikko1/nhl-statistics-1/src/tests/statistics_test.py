@@ -1,5 +1,5 @@
 import unittest
-from statistics import Statistics
+from statistics import Statistics, SortBy
 from player import Player
 
 class PlayerReaderStub:
@@ -41,5 +41,19 @@ class TestStatistics(unittest.TestCase):
         self.assertAlmostEqual(players[0].team, "EDM")
         self.assertAlmostEqual(players[0].goals, 35)
         self.assertAlmostEqual(players[0].assists, 89)
+
+    def test_top_assists_returns_players(self):
+        players = self.statistics.top(1, SortBy.ASSISTS)
+        self.assertAlmostEqual(players[0].name, "Gretzky")
+        self.assertAlmostEqual(players[0].team, "EDM")
+        self.assertAlmostEqual(players[0].goals, 35)
+        self.assertAlmostEqual(players[0].assists, 89)
+
+    def test_top_goals_returns_players(self):
+        players = self.statistics.top(1, SortBy.GOALS)
+        self.assertAlmostEqual(players[0].name, "Lemieux")
+        self.assertAlmostEqual(players[0].team, "PIT")
+        self.assertAlmostEqual(players[0].goals, 45)
+        self.assertAlmostEqual(players[0].assists, 54)
         
 
